@@ -95,15 +95,10 @@ export function validatenull(val) {
  * 日期控件集合
  */
 export const dateList = [
-  "dates",
   "date",
-  "datetime",
-  "datetimerange",
-  "daterange",
-  "week",
   "month",
-  "dategrpup",
-  "year",
+  "range",
+  "week",
 ];
 /**
  * 搜索框获取动态组件

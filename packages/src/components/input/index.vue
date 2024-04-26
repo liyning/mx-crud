@@ -1,6 +1,6 @@
 <template>
   <div :class="b()">
-    <el-input
+    <a-input
       :size="size"
       :clearable="disabled ? false : clearable"
       v-model="text"
@@ -26,7 +26,7 @@
       <template slot="append" v-if="append"
         ><span @click="appendClick()">{{ append }}</span></template
       >
-    </el-input>
+    </a-input>
   </div>
 </template>
 

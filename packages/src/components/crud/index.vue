@@ -1,64 +1,11 @@
 <!--
- * @Author: Mx
- * @Date: 2023-03-22 10:09:58
+ * @Author: liyaning
+ * @Date: 2024-04-22 10:09:58
  * @Description: Crud
 -->
 <template>
   <div :class="b()">
-    <!-- 顶部操作栏 -->
-    <div :class="b('menu')">
-      <div :class="b('left')">
-        <el-button
-          type="primary"
-          @click="rowAdd"
-          :icon="config.addBtnIcon"
-          :size="controlSize"
-          :disabled="tableOption.addDisabled"
-          v-if="vaildData(tableOption.addBtn, true)"
-          >新增</el-button
-        >
-        <el-button
-          type="primary"
-          @click="searchChange"
-          :icon="config.searchBtnIcon"
-          :size="controlSize"
-          :loading="tableLoading"
-          class="btn-query"
-          v-if="vaildData(tableOption.search, true)"
-          >查询</el-button
-        >
-        <el-button
-          type="primary"
-          plain
-          @click="exportExcel"
-          :size="controlSize"
-          :loading="exportLoading"
-          v-if="vaildData(tableOption.exportBtn, false)"
-          >导出</el-button
-        >
-        <el-button
-          type="primary"
-          plain
-          @click="exportRecord"
-          :size="controlSize"
-          :loading="exportLoading"
-          v-if="vaildData(tableOption.exportRecordBtn, false)"
-          >导出记录</el-button
-        >
-        <el-button
-          type="info"
-          @click="searchReset"
-          :size="controlSize"
-          v-if="vaildData(tableOption.search, true)"
-        >
-          重置
-        </el-button>
-        <!-- 自定义按钮 -->
-        <slot name="menuLeft"></slot>
-      </div>
-
-      <div :class="b('right')"></div>
-    </div>
+    
     <!-- 搜索组件 -->
     <HeaderSearch v-model="searchForm" ref="headerSearch">
       <template
@@ -70,32 +17,35 @@
         <slot v-if="item.searchslot" :column="column" :name="item.prop + 'Search'"></slot>
       </template>
     </HeaderSearch>
-    <!-- 表格主体 -->
-    <el-table
-      :data="list"
-      v-loading="tableLoading"
-      :border="vaildData(tableOption.border, config.border)"
-    >
-      <Column
-        :tableColumn="tableColumn"
-        :tableOption="tableOption"
-        @row-del="rowDel"
-        @row-view="rowView"
-        @custom-view="customView"
-        @row-edit="rowEdit"
-        @custom-edit="customEdit"
-      >
-        <!-- 每列 自定义slot -->
-        <template v-for="item in propOption" slot-scope="scope" :slot="item.prop">
-          <slot :row="scope.row" :name="item.prop"></slot>
-        </template>
+    <!-- 顶部操作栏 -->
+    <div :class="b('menu')">
+      <div :class="b('left')">
+        <a-button
+          type="primary"
+          @click="searchChange"
+          :icon="config.searchBtnIcon"
+          :loading="tableLoading"
+          class="btn-query"
+          v-if="vaildData(tableOption.search, true)"
+          >
+         <a-icon type="search" />
+          查询
+          </a-button
+        >
+        <a-button
+          type="info"
+          @click="searchReset"
+          v-if="vaildData(tableOption.search, true)"
+        >
+        <a-icon type="redo" />
+          重置
+        </a-button>
+      </div>
 
-        <!-- 操作栏 自定义slot-->
-        <template v-slot:menu="{ row }">
-          <slot name="menu" :row="row"></slot>
-        </template>
-      </Column>
-    </el-table>
+      <div :class="b('right')"></div>
+    </div>
+    <!-- 表格主体 -->
+    
     <!-- 分页 -->
     <Page ref="tablePage"></Page>
 
@@ -172,7 +122,7 @@ export default create({
       return result;
     },
     controlSize() {
-      return this.tableOption.size || "small";
+      return this.tableOption.size || "default";
     },
   },
   watch: {

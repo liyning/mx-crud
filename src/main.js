@@ -6,16 +6,16 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import ElementUI from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
 import './mock';
 
-Vue.use(ElementUI);
+Vue.use(Antd);
 Vue.config.productionTip = false;
 
 // 组件库
-import mxCrud from "mx-crud";
-import 'mx-crud/lib/mx-crud.css';
+import mxCrud from "../packages/src/index.js";
+import '../packages/src/styles/index.scss';
 // 调试或者自定义crud
 // import mxCrud from "../packages/src/index";
 Vue.use(mxCrud);

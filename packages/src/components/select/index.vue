@@ -1,36 +1,34 @@
 <!--
- * @Author: Mx
- * @Date: 2023-03-16 17:40:18
+ * @Author: liyaning
+ * @Date: 2024-04-16 17:40:18
  * @Description: Select
 -->
 <template>
   <div :class="b()">
-    <el-select
+    <a-select
+      style="width: 100%"
       v-model="text"
-      :loading="loading"
       :size="size"
-      loading-text="查询中..."
       :multiple="multiple"
-      :clearable="disabled ? false : clearable"
+      :mode="multiple?'multiple':'default'"
+      :allowClear="disabled ? false : clearable"
       :placeholder="placeholder"
-      :multiple-limit="limit"
-      :value-key="valueKey || 'id'"
+      :maxTagCount="limit"
       :disabled="disabled"
       @focus="handleFocus"
       @blur="handleBlur"
-      @click.native="handleClick"
+      @select="handleClick"
       @change="handleChange"
     >
-      <el-option label="全部" :value="''" v-if="hasAll"></el-option>
-      <el-option
+      <a-select-option
         v-for="(item, index) in dicData"
         :key="index"
         :disabled="item[disabledKey]"
-        :label="getLabelText(item)"
         :value="item[valueKey]"
       >
-      </el-option>
-    </el-select>
+      {{ getLabelText(item) }}
+      </a-select-option>
+    </a-select>
   </div>
 </template>
 <script>
@@ -77,12 +75,14 @@ export default create({
   },
   computed: {
     valueKey() {
+
+      console.log('this.dicData', this.dicData)
+      console.log('this.props.value', this.props.value)
       return this.props.value;
     },
   },
   data() {
     return {
-      loading: false,
     };
   },
   methods: {},

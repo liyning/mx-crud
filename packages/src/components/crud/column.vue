@@ -1,7 +1,7 @@
 <template>
   <div :class="b()">
     <!-- 序号 -->
-    <el-table-column
+    <a-table-column
       v-if="vaildData(tableOption.index, false)"
       type="index"
       width="60"
@@ -9,17 +9,17 @@
       align="center"
       :label="tableOption.indexLabel || config.indexLabel"
     >
-    </el-table-column>
+    </a-table-column>
 
     <!-- 占位列解决ele固定列导致列表顺序错乱 -->
-    <el-table-column
+    <a-table-column
       width="1px"
       v-show="false"
       class-name="hidden-column"
-    ></el-table-column>
+    ></a-table-column>
     <!--表格所有列-->
 
-    <el-table-column
+    <a-table-column
       :key="index"
       :prop="column.prop"
       :label="column.label"
@@ -34,10 +34,10 @@
           <span v-html="handleDetail(scope.row, column)"></span>
         </template>
       </template>
-    </el-table-column>
+    </a-table-column>
 
     <!-- 操作列 -->
-    <el-table-column
+    <a-table-column
       fixed="right"
       label="操作"
       :width="vaildData(tableOption.menuWidth, config.menuWidth)"
@@ -45,29 +45,29 @@
     >
       <template v-slot="{ row, $index }">
         <!-- 查看按钮 -->
-        <el-button
+        <a-button
           type="text"
           @click="rowView(row, $index)"
           v-if="vaildData(tableOption.isViewBtn, config.isViewBtn)"
-          >查看</el-button
+          >查看</a-button
         >
         <!-- 编辑按钮 -->
-        <el-button
+        <a-button
           type="text"
           @click="rowEdit(row, $index)"
           v-if="vaildData(tableOption.isEditBtn, config.isEditBtn)"
-          >编辑</el-button
+          >编辑</a-button
         >
         <!-- 删除按钮 -->
-        <el-button
+        <a-button
           type="text"
           @click="rowDel(row, $index)"
           v-if="vaildData(tableOption.isDelBtn, config.isDelBtn)"
-          >删除</el-button
+          >删除</a-button
         >
         <slot name="menu" :row="row"></slot>
       </template>
-    </el-table-column>
+    </a-table-column>
   </div>
 </template>
 

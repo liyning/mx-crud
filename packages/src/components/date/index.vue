@@ -1,33 +1,46 @@
 <!--
- * @Author: Mx
- * @Date: 2023-03-16 20:41:50
+ * @Author: liyaning
+ * @Date: 2024-04-16 20:41:50
  * @Description: 日期时间组件
 -->
 <template>
   <div :class="b()">
-    <el-date-picker
-      :type="type"
+    <a-date-picker
+      style="width:100%;"
+      v-if="type==='date'"
       v-model="text"
       :size="size"
-      placement="bottom-start"
-      :readonly="readonly"
-      range-separator="至"
-      :start-placeholder="startPlaceholder"
-      :end-placeholder="endPlaceholder"
-      :format="type === 'week' ? 'yyyy 第 WW 周' : format"
+      :format="format"
       :clearable="disabled ? false : clearable"
-      :picker-options="pickerOptions"
-      :value-format="valueFormat"
-      :default-time="defaultTime"
+      :valueFormat="valueFormat"
+      :defaultValue="defaultValue?defaultValue:null"
+      :defaultPickerValue="defaultPickerValue?defaultPickerValue:null"
       :placeholder="placeholder"
-      :editable="editable"
       @change="handleChange"
       @blur="handleBlur"
       @focus="handleFocus"
-      @click.native="handleClick"
       :disabled="disabled"
     >
-    </el-date-picker>
+    </a-date-picker>
+    <a-range-picker
+      style="width:100%;"
+      v-if="type==='range'"
+      v-model="text"
+      :size="size"
+      separator="至"
+      :start-placeholder="startPlaceholder"
+      :end-placeholder="endPlaceholder"
+      :format="format"
+      :clearable="disabled ? false : clearable"
+      :valueFormat="valueFormat"
+      :defaultValue="defaultValue?defaultValue:null"
+      :defaultPickerValue="defaultPickerValue?defaultPickerValue:null"
+      @change="handleChange"
+      @blur="handleBlur"
+      @focus="handleFocus"
+      :disabled="disabled"
+    >
+    </a-range-picker>
   </div>
 </template>
 <script>

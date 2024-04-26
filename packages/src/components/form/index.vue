@@ -1,22 +1,22 @@
 <!--
- * @Author: Mx
- * @Date: 2023-03-23 10:39:08
+ * @Author: liyaning
+ * @Date: 2024-04-23 10:39:08
  * @Description: Form
 -->
 <template>
   <div :class="b()" :style="{ width: '100%' }">
-    <el-form
+    <a-form
       ref="form"
       :model="form"
-      :label-position="vaildData(formOption.labelPosition, config.labelPosition)"
+      :laba-position="vaildData(formOption.labelPosition, config.labelPosition)"
       :size="formOption.size"
-      :label-width="setPx(formOption.labelWidth, config.labelWidth)"
+      :laba-width="setPx(formOption.labelWidth, config.labelWidth)"
       :rules="formRules"
     >
-      <el-row>
+      <a-row>
         <template v-for="(column, cindex) in formOption.column">
-          <el-col :span="12" :key="cindex">
-            <el-form-item
+          <a-col :span="12" :key="cindex">
+            <a-form-item
               v-if="vaildDisplay(column)"
               :prop="column.prop"
               :class="
@@ -29,7 +29,7 @@
                       : '')
                 )
               "
-              :label-width="getLabelWidth(column)"
+              :laba-width="getLabelWidth(column)"
               :label="column.labelAlias || column.label"
             >
               <component
@@ -48,7 +48,7 @@
                 :multiple="column.multiple"
                 :placeholder="column.searchPlaceholder || ''"
                 :prop="column.prop"
-                :size="$parent.controlSize"
+                size="default"
                 :type="column.type"
                 :value-format="column.valueFormat"
                 :tpyeformat="column.tpyeformat"
@@ -58,11 +58,11 @@
                 :clear="column.clear"
                 :maxlength="column.maxlength"
               ></component>
-            </el-form-item>
-          </el-col>
+            </a-form-item>
+          </a-col>
         </template>
-      </el-row>
-    </el-form>
+      </a-row>
+    </a-form>
   </div>
 </template>
 

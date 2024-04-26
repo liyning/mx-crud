@@ -1,5 +1,5 @@
 <template>
-  <el-dialog
+  <a-modal
     lock-scroll
     :class="b('dialog')"
     :title="titleAlias || title"
@@ -11,7 +11,6 @@
     :visible.sync="boxVisible"
     @close="closeDialog"
   >
-    <el-scrollbar style="height: 100%">
       <mx-form
         v-model="tableForm"
         v-if="boxVisible"
@@ -19,32 +18,31 @@
         :formOption="formOption"
       >
       </mx-form>
-    </el-scrollbar>
     <span slot="footer" class="dialog-footer">
       <template v-if="boxType === 'view'">
-        <el-button type="primary" :size="$parent.controlSize" @click="boxVisible = false"
-          >确 定</el-button
+        <a-button type="primary" :size="$parent.controlSize" @click="boxVisible = false"
+          >确 定</a-button
         >
       </template>
       <template v-else>
-        <el-button :size="$parent.controlSize" @click="closeDialog">取 消</el-button>
-        <el-button
+        <a-button :size="$parent.controlSize" @click="closeDialog">取 消</a-button>
+        <a-button
           type="primary"
           :size="$parent.controlSize"
           v-if="boxType === 'edit'"
           @click="rowUpdate"
-          >保 存</el-button
+          >保 存</a-button
         >
-        <el-button
+        <a-button
           type="primary"
           :size="$parent.controlSize"
           v-if="boxType === 'add'"
           @click="rowSave"
-          >保 存</el-button
+          >保 存</a-button
         >
       </template>
     </span>
-  </el-dialog>
+  </a-modal>
 </template>
 <script>
 import create from "../../core/create";

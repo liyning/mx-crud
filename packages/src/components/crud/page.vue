@@ -1,12 +1,12 @@
 <!--
- * @Author: Mx
+ * @Author: liyaning
  * @Date: 2022-08-01 22:28:44
  * @Description: 
 -->
 <template>
   <div :class="b('pagination')">
-    <el-pagination
-      element-loading-spinner="el-icon-loading"
+    <a-pagination
+      element-loading-spinner="a-icon-loading"
       element-loading-text="页码数据加载中..."
       :current-page.sync="defaultPage.current"
       :page-size="defaultPage.pageSize"
@@ -15,7 +15,7 @@
       @current-change="currentChange"
       layout="total, sizes, prev, pager, next, jumper"
       :total="defaultPage.total"
-    ></el-pagination>
+    ></a-pagination>
   </div>
 </template>
 <script>
@@ -62,7 +62,7 @@ export default create({
 });
 </script>
 <style scoped lang="scss">
-.el-pagination {
+.a-pagination {
   text-align: right;
 }
 </style>

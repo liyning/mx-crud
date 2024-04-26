@@ -18,12 +18,11 @@
       @search-reset="resetList"
     >
       <template v-slot:menuLeft>
-        <el-button
+        <a-button
           type="danger"
           icon="el-icon-plus"
-          size="small"
           @click="$refs.crud.rowAdd()"
-          >自定义头部按钮</el-button
+          >自定义头部按钮</a-button
         >
       </template>
       <template v-slot:zdy="{ row }"> 自定义列id:{{ row.id }} </template>
@@ -139,6 +138,19 @@ export default {
             prop: "date",
             search: true,
             type: "date", // 搜索-定义类型
+            format: "yyyy-MM-dd",
+            valueFormat: "yyyy-MM-dd",
+            rules: {
+              required: true,
+              message: "请选择",
+              trigger: ["blur", "change"],
+            },
+          },
+          {
+            label: "日期",
+            prop: "dateRange",
+            search: true,
+            type: "range", // 搜索-定义类型
             format: "yyyy-MM-dd",
             valueFormat: "yyyy-MM-dd",
             rules: {

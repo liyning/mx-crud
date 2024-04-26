@@ -1,6 +1,6 @@
 /*
- * @Author: Mx
- * @Date: 2023-03-22 10:09:58
+ * @Author: liyaning
+ * @Date: 2024-04-22 10:09:58
  * @Description: mixins
  */
 import { RESPONSE_CODE } from '../core/constant';

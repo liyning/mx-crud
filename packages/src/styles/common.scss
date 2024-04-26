@@ -1,4 +1,4 @@
-.el-form{
+.a-form{
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -17,10 +17,10 @@
     height: auto;
 }
 .mx-form{
-  .el-select,.el-date-editor{
+  .a-select,.a-date-editor{
       width: 100% !important;
   }
 }
-.el-table .el-table__row .el-table__cell{
+.a-table .a-table__row .a-table__cell{
     padding: 0 !important;
 }
