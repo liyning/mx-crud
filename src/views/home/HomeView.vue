@@ -138,8 +138,7 @@ export default {
             prop: "date",
             search: true,
             type: "date", // 搜索-定义类型
-            format: "yyyy-MM-dd",
-            valueFormat: "yyyy-MM-dd",
+            valueFormat: "YYYY-MM-DD HH:mm:ss",
             rules: {
               required: true,
               message: "请选择",
@@ -151,8 +150,7 @@ export default {
             prop: "dateRange",
             search: true,
             type: "range", // 搜索-定义类型
-            format: "yyyy-MM-dd",
-            valueFormat: "yyyy-MM-dd",
+            valueFormat: "YYYY-MM-DD HH:mm:ss",
             rules: {
               required: true,
               message: "请选择",

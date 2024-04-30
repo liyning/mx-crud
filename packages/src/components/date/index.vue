@@ -1,6 +1,6 @@
 <!--
  * @Author: liyaning
- * @Date: 2024-04-16 20:41:50
+ * @Date: 2024-04-28 20:41:50
  * @Description: 日期时间组件
 -->
 <template>
@@ -10,11 +10,11 @@
       v-if="type==='date'"
       v-model="text"
       :size="size"
-      :format="format"
-      :clearable="disabled ? false : clearable"
+      :show-time="true"
+      :allowClear="disabled ? false : allowClear"
       :valueFormat="valueFormat"
-      :defaultValue="defaultValue?defaultValue:null"
-      :defaultPickerValue="defaultPickerValue?defaultPickerValue:null"
+      :defaultValue="defaultValue"
+      :defaultPickerValue="defaultPickerValue"
       :placeholder="placeholder"
       @change="handleChange"
       @blur="handleBlur"
@@ -27,14 +27,13 @@
       v-if="type==='range'"
       v-model="text"
       :size="size"
-      separator="至"
-      :start-placeholder="startPlaceholder"
-      :end-placeholder="endPlaceholder"
-      :format="format"
-      :clearable="disabled ? false : clearable"
+      :show-time="showTime"
+      separator="~"
+      :placeholder="[startPlaceholder,endPlaceholder]"
+      :allowClear="disabled ? false : allowClear"
       :valueFormat="valueFormat"
-      :defaultValue="defaultValue?defaultValue:null"
-      :defaultPickerValue="defaultPickerValue?defaultPickerValue:null"
+      :defaultValue="defaultValue"
+      :defaultPickerValue="defaultPickerValue"
       @change="handleChange"
       @blur="handleBlur"
       @focus="handleFocus"
@@ -52,7 +51,7 @@ export default create({
   mixins: [props(), event()],
   data() {
     return {
-      text: "",
+      text: null,
     };
   },
   props: {
@@ -60,7 +59,22 @@ export default create({
       type: Boolean,
       default: false,
     },
+    allowClear: {
+      type: Boolean,
+      default: true,
+    },
     value: {},
+    defaultValue:{
+      default:null
+    },
+    defaultPickerValue:{
+      default:null
+    },
+    showTime:{
+      type:Object,
+      default: { format: 'HH:mm:ss' },
+
+    },
     startPlaceholder: {
       type: String,
       default() {
@@ -86,9 +100,8 @@ export default create({
     },
     valueFormat: {
       type: String,
-      default: "yyyy-MM-dd HH:mm:ss",
+      default: "YYYY-MM-DD HH:mm:ss",
     },
-    format: {},
     editable: {
       type: Boolean,
       default: true,

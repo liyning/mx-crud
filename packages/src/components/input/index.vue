@@ -72,6 +72,7 @@ export default create({
     },
     maxlength: {
       type: Number,
+      default: 200,
     },
     minRows: {
       type: Number,
