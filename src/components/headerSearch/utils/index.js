@@ -51,15 +51,15 @@ export const getObjType = (obj) => {
   return map[toString.call(obj)];
 };
 
-// /*
-//  *@Description: 检测真值 不为真 返回默认值
-//  */
-// export const vaildData = (val, dafult) => {
-//   if (typeof val === "boolean") {
-//     return val;
-//   }
-//   return !validatenull(val) ? val : dafult;
-// };
+/*
+ *@Description: 检测真值 不为真 返回默认值
+ */
+export const vaildData = (val, dafult) => {
+  if (typeof val === "boolean") {
+    return val;
+  }
+  return !validatenull(val) ? val : dafult;
+};
 
 /*
  *@Description: 判断是否为空

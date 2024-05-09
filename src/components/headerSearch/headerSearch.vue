@@ -6,14 +6,15 @@
 <template>
   <div class="table-search" ref="tableSearch">
     <a-form
-      :model="searchForm"
+      :class="b('search')"
+      :form="searchForm"
       layout="inline"
       :labelAlign="config.labelAlign"
       ref="searchForm"
       @submit="searchChange"
     >
       <a-row :gutter="48">
-        <template v-for="(column, index) in $parent.searchOption" >
+        <template v-for="(column, index) in searchOption" >
             <a-col :md="6" :key="column.prop">
               <!-- 自定义列搜索 -->
               <template v-if="getType(column) == 'slot'">
@@ -45,7 +46,6 @@
                     column.defaultTime || (column.more ? ['00:00:00', '23:59:59'] : '')
                   "
                   :disabled="column.disabled"
-                  :dic="$parent.DIC[column.prop]"
                   :filterable="column.searchFilterable"
                   :format="column.format"
                   :multiple="
@@ -67,12 +67,12 @@
               </a-form-item>
             </a-col>
         </template>
-        <a-col :md="8" :sm="24" v-if="showSubmitBtn">
+        <!-- <a-col :md="8" :sm="24" >
           <span class="table-page-search-submitButtons" :style="{ float: 'right', overflow: 'hidden' } || {} ">
             <a-button type="primary" @click="searchChange"><a-icon type="search" />查询</a-button>
             <a-button style="margin-left: 8px" @click="searchReset"><a-icon type="redo" />重置</a-button>
           </span>
-        </a-col>
+        </a-col> -->
       </a-row>
 
     </a-form>
@@ -80,19 +80,27 @@
 </template>
 <script>
 import config from "./config.js";
-import { getSearchType, getType } from "./utils";
+import { getSearchType, getType, deepClone,vaildData } from "./utils";
 import { formInitVal } from "./core/dataformat";
 import create from "./core/create";
 export default create({
   name: "headerSearch",
   data() {
     return {
+      vaildData,
       config,
       searchForm: {},
     };
   },
+  props: {
+    searchOption: {
+      type: Array,
+      default: () => [],
+    },
+  },
   created() {
     this.init();
+    console.log('searchOption------',this.searchOption)
   },
   methods: {
     // 初始化
@@ -103,16 +111,18 @@ export default create({
     },
     // 搜索回调
     searchChange() {
-      this.$parent.$emit("search-change", this.searchForm);
+      this.$emit("search-change", this.searchForm);
     },
     // 搜索清空
     searchReset() {
+      console.log('this.$refs',this.$refs["searchForm"])
       this.$refs["searchForm"].resetFields();
-      this.$parent.$emit("search-reset");
+      // this.$emit("search-reset");
     },
     // 过滤searchForm默认
     dataformat() {
-      this.searchForm = this.deepClone(formInitVal(this.$parent.searchOption).searchForm);
+      this.searchForm = deepClone(formInitVal(this.searchOption).searchForm);
+      console.log('this.searchForm----444', this.searchForm)
     },
   },
 });

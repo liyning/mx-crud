@@ -59,20 +59,16 @@ export const formInitVal = (list = []) => {
       ele.dataType === 'array'
     ) {
       tableForm[ele.prop] = [];
-      if (ele.search) searchForm[ele.prop] = [];
+      searchForm[ele.prop] = [];
     } else if (
       ['number', 'rate', 'silder'].includes(ele.type) ||
       ele.dataType === 'number'
     ) {
       tableForm[ele.prop] = 0;
-      if (ele.search) {
-        searchForm[ele.prop] = 0;
-      }
+      searchForm[ele.prop] = 0;
     } else {
       tableForm[ele.prop] = '';
-      if (ele.search) {
-        searchForm[ele.prop] = '';
-      }
+      searchForm[ele.prop] = '';
     }
     // 表单默认值设置
     if (!validatenull(ele.valueDefault)) tableForm[ele.prop] = ele.valueDefault;
