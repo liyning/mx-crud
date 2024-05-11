@@ -67,12 +67,10 @@
               </a-form-item>
             </a-col>
         </template>
-        <!-- <a-col :md="8" :sm="24" >
-          <span class="table-page-search-submitButtons" :style="{ float: 'right', overflow: 'hidden' } || {} ">
-            <a-button type="primary" @click="searchChange"><a-icon type="search" />查询</a-button>
-            <a-button style="margin-left: 8px" @click="searchReset"><a-icon type="redo" />重置</a-button>
-          </span>
-        </a-col> -->
+        <span class="table-page-search-submitButtons" v-if="showSearchBtn">
+          <a-button type="primary" @click="searchChange"><a-icon type="search" />查询</a-button>
+          <a-button style="margin-left: 8px" @click="searchReset"><a-icon type="redo" />重置</a-button>
+        </span>
       </a-row>
 
     </a-form>
@@ -97,6 +95,10 @@ export default create({
       type: Array,
       default: () => [],
     },
+    showSearchBtn:{
+      type: Boolean,
+      default: false,
+    }
   },
   created() {
     this.init();
@@ -115,9 +117,8 @@ export default create({
     },
     // 搜索清空
     searchReset() {
-      console.log('this.$refs',this.$refs["searchForm"])
-      this.$refs["searchForm"].resetFields();
-      // this.$emit("search-reset");
+      this.dataformat();
+      this.$emit("search-change", this.searchForm);
     },
     // 过滤searchForm默认
     dataformat() {
