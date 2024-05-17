@@ -85,6 +85,8 @@ export default create({
     return {
     };
   },
+  mounted(){
+  },
   methods: {},
 });
 </script>

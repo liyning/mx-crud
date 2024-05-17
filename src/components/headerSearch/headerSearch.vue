@@ -4,13 +4,12 @@
  * @Description: 
 -->
 <template>
-  <div class="table-search" ref="tableSearch">
+  <div class="table-search">
     <a-form
       :class="b('search')"
       :form="searchForm"
       layout="inline"
       :labelAlign="config.labelAlign"
-      ref="searchForm"
       @submit="searchChange"
     >
       <a-row :gutter="48">
@@ -35,7 +34,7 @@
                 :key="index"
                 :prop="column.prop"
                 v-else
-                :label="column.label + ' :'"
+                :label="`${column.label}：`"
               >
                 <component
                   v-model="searchForm[column.prop]"
@@ -52,7 +51,7 @@
                     config.multiple.includes(column.type) &&
                     vaildData(column.multiple, false)
                   "
-                  :placeholder="column.searchPlaceholder || ''"
+                  :placeholder="column.placeholder || placeholderTxt(column)"
                   :prop="column.prop"
                   :size="config.size"
                   :type="getType(column)"
@@ -102,9 +101,18 @@ export default create({
   },
   created() {
     this.init();
-    console.log('searchOption------',this.searchOption)
   },
   methods: {
+    placeholderTxt(item) {
+      let placeholder = `请输入${item.label}`;
+      if(item.type === 'select'){
+        placeholder = `请选择${item.label}`
+      }
+      if(item.type === 'range'){
+        placeholder = ['开始日期','结束日期']
+      }
+      return placeholder;
+    },
     // 初始化
     init() {
       this.getSearchType = getSearchType;
@@ -123,7 +131,6 @@ export default create({
     // 过滤searchForm默认
     dataformat() {
       this.searchForm = deepClone(formInitVal(this.searchOption).searchForm);
-      console.log('this.searchForm----444', this.searchForm)
     },
   },
 });
