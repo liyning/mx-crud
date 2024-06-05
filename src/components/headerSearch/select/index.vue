@@ -11,7 +11,7 @@
       :size="size"
       :multiple="multiple"
       :mode="multiple?'multiple':'default'"
-      :allowClear="disabled ? false : clearable"
+      :allowClear="disabled ? false : allowClear"
       :placeholder="placeholder"
       :maxTagCount="limit"
       :disabled="disabled"
@@ -53,9 +53,9 @@ export default create({
       type: Boolean,
       default: true,
     },
-    allowCreate: {
+    allowClear: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     limit: {
       type: Number,

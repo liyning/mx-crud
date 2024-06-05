@@ -14,7 +14,7 @@
     >
       <a-row :gutter="48">
         <template v-for="(column, index) in searchOption" >
-            <a-col :md="6" :key="column.prop">
+            <a-col :key="column.prop" :span="column.span || 6" :style="column.style">
               <!-- 自定义列搜索 -->
               <template v-if="getType(column) == 'slot'">
                 <a-form-item
@@ -65,11 +65,12 @@
                 ></component>
               </a-form-item>
             </a-col>
+            <slot :name="column.append" v-if="column.append"></slot>
         </template>
-        <span class="table-page-search-submitButtons" v-if="showSearchBtn">
+        <a-col :span="4" style="margin-left:-24px" v-if="showSearchBtn">
           <a-button type="primary" @click="searchChange"><a-icon type="search" />查询</a-button>
           <a-button style="margin-left: 8px" @click="searchReset"><a-icon type="redo" />重置</a-button>
-        </span>
+        </a-col>
       </a-row>
 
     </a-form>
@@ -81,7 +82,7 @@ import { getSearchType, getType, deepClone,vaildData } from "./utils";
 import { formInitVal } from "./core/dataformat";
 import create from "./core/create";
 export default create({
-  name: "headerSearch",
+  name: "headerSearch", 
   data() {
     return {
       vaildData,
@@ -109,7 +110,7 @@ export default create({
         placeholder = `请选择${item.label}`
       }
       if(item.type === 'range'){
-        placeholder = ['开始日期','结束日期']
+        placeholder =  `请选择${item.label}`;
       }
       return placeholder;
     },

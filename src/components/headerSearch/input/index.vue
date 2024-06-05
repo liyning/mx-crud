@@ -2,7 +2,7 @@
   <div :class="b()">
     <a-input
       :size="size"
-      :allowClear="disabled ? false : clearable"
+      :allowClear="disabled ? false : allowClear"
       v-model="text"
       @click.native="handleClick"
       :type="typeParam"
@@ -19,14 +19,7 @@
       @blur="handleBlur"
       @input="handleInput"
       :disabled="disabled"
-    >
-      <template slot="prepend" v-if="prepend"
-        ><span @click="prependClick()">{{ prepend }}</span></template
-      >
-      <template slot="append" v-if="append"
-        ><span @click="appendClick()">{{ append }}</span></template
-      >
-    </a-input>
+    ></a-input>
   </div>
 </template>
 
@@ -63,6 +56,10 @@ export default create({
     appendClick: {
       type: Function,
       default: () => {},
+    },
+    allowClear: {
+      type: Boolean,
+      default: true,
     },
     append: {
       type: String,

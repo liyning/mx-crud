@@ -68,12 +68,14 @@ export const formInitVal = (list = []) => {
       searchForm[ele.prop] = 0;
     } else if(ele.type === 'select'){
       searchForm[ele.prop] = undefined;
-    }else {
+    }else if(ele.type === 'range'){
+      searchForm[ele.prop] = null;
+    } else {
       tableForm[ele.prop] = '';
       searchForm[ele.prop] = '';
     }
     // 表单默认值设置
-    if (!validatenull(ele.valueDefault)) searchForm[ele.prop] = ele.valueDefault;
+    if (!validatenull(ele.defaultValue)) searchForm[ele.prop] = ele.defaultValue;
     // 搜索表单默认值设置
     if (!validatenull(ele.searchDefault)) {
       searchForm[ele.prop] = ele.searchDefault;

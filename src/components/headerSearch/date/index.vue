@@ -71,8 +71,8 @@ export default create({
       default:null
     },
     showTime:{
-      type:Object,
-      default: { format: 'HH:mm:ss' },
+      type: Object,
+      default: () => {return { format: 'HH:mm:ss' }},
 
     },
     startPlaceholder: {
